@@ -58,11 +58,12 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             })
-                .then(response => response.json())  // Parse the response as JSON
+                .then(response => response.json())
                 .then(data => {
-                    // Handle the split data and activate the second tab
+                    // Pass the event and tab name to the openTab function
+                    openTab({ currentTarget: document.querySelector(".tablink:nth-child(2)") }, 'tab2');
+                    // Display the split data in the second tab
                     displaySplitTexts(data);
-                    openTab(event, 'tab2');
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -118,6 +119,5 @@
 </body>
 
 </html>
-
 
 ```
