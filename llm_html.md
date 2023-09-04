@@ -28,9 +28,10 @@
             <div id="split_texts">
                 <!-- Split texts will be displayed here -->
             </div>
-            <div id="displayed_text" class="loading">Loading...</div> <!-- Add class "loading" -->
+            <textarea id="text_area" rows="4" cols="50" placeholder="Enter Text Here" readonly></textarea>
         </div>
     </div>
+
 
 
     <!-- JavaScript for Tabs and Interaction -->
@@ -72,6 +73,7 @@
             // Prevent form submission (which would reload the page)
             return false;
         }
+
         function displaySplitTexts(data) {
             var splitTextsDiv = document.getElementById("split_texts");
             splitTextsDiv.innerHTML = "";  // Clear the previous content
@@ -84,13 +86,14 @@
                 splitTextsDiv.appendChild(div);
             });
         }
+
         function displayText(element) {
             // Disable the entire page
             document.body.style.pointerEvents = "none";
 
-            // Display "Loading..." message in the second div
-            var displayedText = document.getElementById("displayed_text");
-            displayedText.innerHTML = "Loading...";
+            // Display "Loading..." message in the textarea
+            var textArea = document.getElementById("text_area");
+            textArea.value = "Loading...";
 
             var text = element.textContent;
             fetch('/uppercase', {
@@ -105,17 +108,19 @@
                     // Enable the entire page
                     document.body.style.pointerEvents = "auto";
 
-                    // Display the uppercase text in the second div
-                    displayedText.innerHTML = data.uppercase_text;
+                    // Display the uppercase text in the textarea
+                    textArea.value = data.uppercase_text;
                 })
                 .catch(error => {
                     console.error('Error:', error);
 
                     // Enable the entire page (in case of an error)
                     document.body.style.pointerEvents = "auto";
+
+                    // Display an error message in the textarea
+                    textArea.value = "Error occurred.";
                 });
         }
-
         function makeClickable(element) {
             element.style.cursor = "pointer";
         }
@@ -126,4 +131,6 @@
 </body>
 
 </html>
+
+
 ```
