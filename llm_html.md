@@ -28,7 +28,9 @@
             <div id="split_texts">
                 <!-- Split texts will be displayed here -->
             </div>
-            <textarea id="text_area" rows="4" cols="50" placeholder="Enter Text Here" readonly></textarea>
+            <div class="response-container">
+                <textarea id="text_area" rows="4" cols="50" placeholder="Enter Text Here" readonly></textarea>
+            </div>
         </div>
     </div>
 
