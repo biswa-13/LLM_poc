@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <title>X12 Data Splitter</title>
 </head>
 <body>
