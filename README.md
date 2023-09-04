@@ -61,9 +61,17 @@
             })
             .then(response => response.text())
             .then(data => {
-                openTab(event, 'tab2');
+                // Pass the event and tab name to the openTab function
+                openTab({ currentTarget: document.querySelector(".tablink:nth-child(2)") }, 'tab2');
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
+        
+            // Prevent form submission (which would reload the page)
+            return false;
         }
+
 
         function makeClickable(element) {
             element.style.cursor = "pointer";
