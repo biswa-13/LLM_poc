@@ -105,10 +105,6 @@
                 });
         }
 
-        function displayText(element) {
-            var displayedText = document.getElementById("displayed_text");
-            displayedText.innerHTML = element.textContent;
-        }
         function makeClickable(element) {
             element.style.cursor = "pointer";
         }
@@ -119,5 +115,4 @@
 </body>
 
 </html>
-
 ```
