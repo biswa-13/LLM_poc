@@ -1,5 +1,4 @@
 ```html
-
 <!DOCTYPE html>
 <html>
 
@@ -29,9 +28,7 @@
             <div id="split_texts">
                 <!-- Split texts will be displayed here -->
             </div>
-            <div id="displayed_text">
-                <!-- Clicked text will be displayed here -->
-            </div>
+            <div id="displayed_text" class="loading">Loading...</div> <!-- Add class "loading" -->
         </div>
     </div>
 
@@ -75,17 +72,36 @@
             return false;
         }
 
-        function displaySplitTexts(data) {
-            var splitTextsDiv = document.getElementById("split_texts");
-            splitTextsDiv.innerHTML = "";  // Clear the previous content
-            data.forEach(function (text) {
-                var div = document.createElement("div");
-                div.className = "clickable-div";
-                div.textContent = text;
-                div.onmouseover = function () { makeClickable(this); };
-                div.onclick = function () { displayText(this); };
-                splitTextsDiv.appendChild(div);
-            });
+        function displayText(element) {
+            // Disable the entire page
+            document.body.style.pointerEvents = "none";
+
+            // Display "Loading..." message in the second div
+            var displayedText = document.getElementById("displayed_text");
+            displayedText.innerHTML = "Loading...";
+
+            var text = element.textContent;
+            fetch('/uppercase', {
+                method: 'POST',
+                body: new URLSearchParams({ 'text': text }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Enable the entire page
+                    document.body.style.pointerEvents = "auto";
+
+                    // Display the uppercase text in the second div
+                    displayedText.innerHTML = data.uppercase_text;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+
+                    // Enable the entire page (in case of an error)
+                    document.body.style.pointerEvents = "auto";
+                });
         }
 
         function displayText(element) {
@@ -102,7 +118,6 @@
 </body>
 
 </html>
-
 
 
 ```
