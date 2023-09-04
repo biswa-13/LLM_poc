@@ -6,6 +6,7 @@
 
 
 
+
 /* styles.css */
 
 /* Body styling */
@@ -93,35 +94,37 @@ button:hover {
     font-weight: bold;
 }
 
-
 /* CSS for Tab 2 */
 #tab2 .split-container {
     display: flex;
-    /* Use flexbox to display divs side by side */
+    justify-content: space-between;
 }
 
 #tab2 #split_texts {
     flex: 1;
-    /* Make the left div take up all available space */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-right: 10px;
 }
 
-#tab2 #displayed_text {
+#tab2 .response-container {
     flex: 1;
-    /* Make the right div take up all available space */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #f9f9f9;
+    /* Background color for the response container */
 }
 
-
-/* CSS for Loading... message */
-#tab2 #displayed_text.loading {
-    font-weight: bold;
-    color: #666;
-    /* Color for the "Loading..." message */
+#tab2 #text_area {
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    /* Disable textarea resizing */
+    background-color: transparent;
+    /* Transparent background for the textarea */
 }
 
 
