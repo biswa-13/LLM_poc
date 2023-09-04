@@ -50,7 +50,7 @@
             evt.currentTarget.className += " active";
         }
 
-        function splitAndActivateTab() {
+           function splitAndActivateTab() {
             var x12Data = document.getElementById("x12_data").value;
             fetch('/split', {
                 method: 'POST',
@@ -59,27 +59,35 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             })
-            .then(response => response.text())
+            .then(response => response.json())  // Parse the response as JSON
             .then(data => {
-                // Pass the event and tab name to the openTab function
-                openTab({ currentTarget: document.querySelector(".tablink:nth-child(2)") }, 'tab2');
+                // Handle the split data and activate the second tab
+                displaySplitTexts(data);
+                openTab(event, 'tab2');
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        
+    
             // Prevent form submission (which would reload the page)
             return false;
         }
 
+        function displaySplitTexts(data) {
+            var splitTextsDiv = document.getElementById("split_texts");
+            splitTextsDiv.innerHTML = "";  // Clear the previous content
+            data.forEach(function(text) {
+                var div = document.createElement("div");
+                div.className = "clickable-div";
+                div.textContent = text;
+                div.onmouseover = function() { makeClickable(this); };
+                div.onclick = function() { displayText(this); };
+                splitTextsDiv.appendChild(div);
+            });
+        }
 
         function makeClickable(element) {
             element.style.cursor = "pointer";
-        }
-
-        function displayText(element) {
-            var displayedText = document.getElementById("displayed_text");
-            displayedText.innerHTML = element.textContent;
         }
 
         // Initially, show the first tab
