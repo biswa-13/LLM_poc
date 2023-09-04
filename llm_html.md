@@ -72,7 +72,18 @@
             // Prevent form submission (which would reload the page)
             return false;
         }
-
+        function displaySplitTexts(data) {
+            var splitTextsDiv = document.getElementById("split_texts");
+            splitTextsDiv.innerHTML = "";  // Clear the previous content
+            data.forEach(function (text) {
+                var div = document.createElement("div");
+                div.className = "clickable-div";
+                div.textContent = text;
+                div.onmouseover = function () { makeClickable(this); };
+                div.onclick = function () { displayText(this); };
+                splitTextsDiv.appendChild(div);
+            });
+        }
         function displayText(element) {
             // Disable the entire page
             document.body.style.pointerEvents = "none";
