@@ -117,4 +117,12 @@ button:hover {
 }
 
 
+/* CSS for Loading... message */
+#tab2 #displayed_text.loading {
+    font-weight: bold;
+    color: #666;
+    /* Color for the "Loading..." message */
+}
+
+
 ```
